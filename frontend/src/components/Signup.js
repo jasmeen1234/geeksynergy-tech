@@ -28,23 +28,33 @@ export default function Signup() {
         profession: '',
     });
     const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    for (const key in formData) {
-      if (formData[key] === '') {
-        alert('Please fill in all fields.');
-        return;
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      let anyFieldEmpty = false;
+  
+      for (const key in formData) {
+          if (formData[key] ===" ") {
+              anyFieldEmpty = false;
+              alert('Please fill in all fields.');
+              break;
+          }
       }
-    }
-    const data = new FormData(event.currentTarget);
-    localStorage.setItem('userData', JSON.stringify(formData));
-    alert('Signup successful!');
-    navigate("/login");
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  
+      if (!anyFieldEmpty) {
+          localStorage.setItem('userData', JSON.stringify(formData));
+          alert('Signup successful!');
+          navigate("/login");
+          
+          // Optional: Log email and password
+          const data = new FormData(event.currentTarget);
+          console.log({
+              email: data.get('email'),
+              password: data.get('password'),
+          });
+      }
   };
+  
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     
