@@ -47,11 +47,7 @@ export default function Signup() {
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'email') {
-      if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-        return;
-      }
-  }
+    
   if (name === 'phone') {
     if (!value.match(/^\d{10}$/)) {
       return;
