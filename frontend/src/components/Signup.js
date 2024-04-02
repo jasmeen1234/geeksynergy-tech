@@ -15,20 +15,7 @@ import Container from '@mui/material/Container';
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
-// TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
@@ -139,20 +126,24 @@ export default function Signup() {
                  margin="normal"
                 />
               </Grid>
-              <FormControl fullWidth variant="outlined" margin="normal" required>
-                        <InputLabel>Profession</InputLabel>
-                        <Select
-                            value={formData.profession}
-                            onChange={handleChange}
-                            label="Profession"
-                            name="profession"
-                        >
-                            <MenuItem value="student">Student</MenuItem>
-                            <MenuItem value="engineer">Engineer</MenuItem>
-                            <MenuItem value="doctor">Doctor</MenuItem>
-                            <MenuItem value="teacher">Teacher</MenuItem>
-                        </Select>
-                    </FormControl>
+              <Grid item xs={12}>
+                                <TextField
+                                    select
+                                    label="Profession"
+                                    variant="outlined"
+                                    name="profession"
+                                    value={formData.profession}
+                                    onChange={handleChange}
+                                    fullWidth
+                                    margin="normal"
+                                    required
+                                >
+                                    <MenuItem value="student">Student</MenuItem>
+                                    <MenuItem value="engineer">Engineer</MenuItem>
+                                    <MenuItem value="doctor">Doctor</MenuItem>
+                                    <MenuItem value="teacher">Teacher</MenuItem>
+                                </TextField>
+                            </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
@@ -171,9 +162,9 @@ export default function Signup() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+              <Link href="/login" variant="body2">
+                                    Already have an account? Sign in
+                                </Link>
               </Grid>
             </Grid>
           </Box>

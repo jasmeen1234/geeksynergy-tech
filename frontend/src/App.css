@@ -3,7 +3,9 @@
   justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 .bttn{
   background-color: lightskyblue;
@@ -11,11 +13,23 @@
   height: 50%;
 }
 .col{
-  margin-right: 30%;
+  margin-right: auto;
+  padding:10px;
 }
 .company_info{
   display: block;
   height: auto;
-  width: 70%;
-  margin-left: 10%;
+  width: 50%;
+  margin-left: 30px;
+}
+@media only screen and (max-width: 768px) {
+  .row {
+    flex-direction: row;
+    /* align-items: flex-start; */
+  }
+
+  .col {
+    /* margin: 10px 0; */
+    margin-right: auto;
+  }
 }

@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -23,6 +24,7 @@ export default function Login({ validCredentials, setValidCredentials }) {
         name: '',
         password: '',
     });
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -35,6 +37,7 @@ export default function Login({ validCredentials, setValidCredentials }) {
     if (storedData && formData.name === storedData.name && formData.password === storedData.password) {
         setValidCredentials(true);
         alert("login successfully");
+        navigate('/companyinfo');
        
     } else {
         alert('Invalid Credentials');
@@ -100,18 +103,7 @@ export default function Login({ validCredentials, setValidCredentials }) {
             >
               Log In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+            
           </Box>
         </Box>
         

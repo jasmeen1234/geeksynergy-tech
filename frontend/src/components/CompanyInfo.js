@@ -36,11 +36,12 @@ function CompanyInfo() {
       {userData.map(item =>(
         <div className='row'>
             <div>
-     <img  style={{height:"80%",width:"70%"}}src={item.poster}/></div>
+     <img  style={{maxHeight:"80px",maxWidth:"70px",padding:"10px"}}src={item.poster}/></div>
      <div className='col'>
        Genre: {item.genre}<br></br>
       Director:{item.director}<br></br>
       Starring: {item.stars}<br></br>
+      Mins | {item.language} | 1 Apr
       <div style={{color:"lightblue"}}>
       {item.pageViews} views | voted by {item.totalVoted} people</div>
       
