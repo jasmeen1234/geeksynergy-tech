@@ -48,11 +48,13 @@ export default function Signup() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-  if (name === 'phone') {
-    if (!value.match(/^\d{10}$/)) {
-      return;
-    }
-}
+    if (name === 'phone') {
+      // Check  value contains only digits
+      if (!(/^\d*$/).test(value)) {
+         
+          return;
+      }
+  }
     setFormData({ ...formData, [name]: value });
 };
 
