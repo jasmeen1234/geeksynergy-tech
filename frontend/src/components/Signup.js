@@ -30,6 +30,12 @@ export default function Signup() {
     const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
+    for (const key in formData) {
+      if (formData[key] === '') {
+        alert('Please fill in all fields.');
+        return;
+      }
+    }
     const data = new FormData(event.currentTarget);
     localStorage.setItem('userData', JSON.stringify(formData));
     alert('Signup successful!');
@@ -41,6 +47,16 @@ export default function Signup() {
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'email') {
+      if (!value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+        return;
+      }
+  }
+  if (name === 'phone') {
+    if (!value.match(/^\d{10}$/)) {
+      return;
+    }
+}
     setFormData({ ...formData, [name]: value });
 };
 
@@ -169,7 +185,7 @@ export default function Signup() {
             </Grid>
           </Box>
         </Box>
-        {/* <Copyright sx={{ mt: 5 }} /> */}
+       
       </Container>
     </ThemeProvider>
   );
