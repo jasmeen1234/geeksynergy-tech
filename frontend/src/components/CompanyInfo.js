@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '.././App.css';
 import Company from './Company';
- export default function CompanyInfo() {
+
+export default function CompanyInfo() {
     const [userData, setUserData] = useState([]);
     const [error, setError] = useState(null);
 
@@ -10,31 +12,18 @@ import Company from './Company';
     }, []);
 
     const fetchUserData = () => {
-        fetch('https://hoblist.com/api/movieList', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                category: "movies",
-                language: "kannada",
-                genre: "all",
-                sort: "voting"
-            })
+        axios.post('https://hoblist.com/api/movieList', {
+            category: "movies",
+            language: "kannada",
+            genre: "all",
+            sort: "voting"
         })
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data.result);
-            setUserData(data.result);
+            setUserData(response.data.result);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
-            setError(error.message);
+            setError('Failed to fetch data');
         });
     };
 
