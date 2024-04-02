@@ -34,7 +34,7 @@ export default function Login({ validCredentials, setValidCredentials }) {
     const storedData = JSON.parse(localStorage.getItem('userData'));
 
     const data = new FormData(event.currentTarget);
-    if (storedData && formData.name === storedData.name && formData.password === storedData.password) {
+    if (storedData && formData.email === storedData.email && formData.password === storedData.password) {
         setValidCredentials(true);
         alert("login successfully");
         navigate('/companyinfo');

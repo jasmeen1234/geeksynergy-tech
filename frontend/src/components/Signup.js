@@ -80,6 +80,7 @@ export default function Signup() {
                                 <TextField
                                     autoComplete="given-name"
                                     name="firstName"
+                                    id="firstName"
                                     required
                                     fullWidth
                                     value={formData.firstName}
@@ -93,6 +94,7 @@ export default function Signup() {
                                     required
                                     fullWidth
                                     label="Last Name"
+                                    id="lastName"
                                     name="lastName"
                                     value={formData.lastName}
                                     onChange={handleChange}
