@@ -1,12 +1,15 @@
-import React ,{useState} from 'react'
+import React, { useState, useEffect } from 'react';
 import '.././App.css';
 import Company from './Company';
-
-function CompanyInfo() {
+ export default function CompanyInfo() {
     const [userData, setUserData] = useState([]);
-  
+    const [error, setError] = useState(null);
 
-   
+    useEffect(() => {
+        fetchUserData();
+    }, []);
+
+    const fetchUserData = () => {
         fetch('https://hoblist.com/api/movieList', {
             method: 'POST',
             headers: {
@@ -19,42 +22,48 @@ function CompanyInfo() {
                 sort: "voting"
             })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+            return response.json();
+        })
         .then(data => {
             console.log(data.result);
-            setUserData(data.result)
-            
+            setUserData(data.result);
         })
         .catch(error => {
             console.error('Error fetching data:', error);
+            setError(error.message);
         });
-    
-  return (
-    <div>
-     <Company/>
-      <div  className='company_info'>
-      {userData.map(item =>(
-        <div className='row'>
-            <div>
-     <img  style={{maxHeight:"80px",maxWidth:"70px",padding:"10px"}}src={item.poster}/></div>
-     <div className='col'>
-       Genre: {item.genre}<br></br>
-      Director:{item.director}<br></br>
-      Starring: {item.stars}<br></br>
-      Mins | {item.language} | 1 Apr
-      <div style={{color:"lightblue"}}>
-      {item.pageViews} views | voted by {item.totalVoted} people</div>
-      
-     </div> 
-     <button className='bttn'>Watch Trailor</button>
-</div>
+    };
 
-))}
+    return (
+        <div>
+            <Company />
+            <div className='company_info'>
+                {error ? (
+                    <div>Error: {error}</div>
+                ) : (
+                    userData.map(item => (
+                        <div className='row' key={item.id}>
+                            <div>
+                                <img style={{ maxHeight: "80px", maxWidth: "70px", padding: "10px" }} src={item.poster} alt={item.title} />
+                            </div>
+                            <div className='col'>
+                                Genre: {item.genre}<br />
+                                Director: {item.director}<br />
+                                Starring: {item.stars}<br />
+                                Mins | {item.language} | 1 Apr
+                                <div style={{ color: "lightblue" }}>
+                                    {item.pageViews} views | voted by {item.totalVoted} people
+                                </div>
+                            </div>
+                            <button className='bttn'>Watch Trailer</button>
+                        </div>
+                    ))
+                )}
+            </div>
         </div>
-        
-     
-    </div>
-  )
+    );
 }
-
-export default CompanyInfo
